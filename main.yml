@@ -1,0 +1,5 @@
+---
+- hosts: all
+
+	tasks:
+		- include: apt/apt.yml

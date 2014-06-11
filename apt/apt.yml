@@ -1,0 +1,18 @@
+---
+
+- name: add dotdeb main repository
+	apt_repository: repo='{{ item }}' update_cache=yes
+	with_items:
+	- deb http://packages.dotdeb.org wheezy all
+	- deb-src http://packages.dotdeb.org wheezy all
+	tags: dotdeb
+
+- name: Install pre-requisites
+	apt: pkg="{{ item }} update_cache=yes"
+	with_itens:
+		- python-software-properties
+		- git
+		- build-essential
+    - autoconf
+    - automake
+  tags: apt  
