@@ -1,5 +1,5 @@
 ---
 - hosts: all
-
-	tasks:
-		- include: apt/apt.yml
+  user: root
+  tasks:
+    - include: apt/apt.yml

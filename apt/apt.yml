@@ -1,18 +1,24 @@
 ---
+  - name: add dotdeb main repository
+    apt_repository: repo='{{ item }}' update_cache=yes
+    with_items:
+      - deb http://packages.dotdeb.org wheezy all
+      - deb-src http://packages.dotdeb.org wheezy all
+    tags: dotdeb
+  
+  - name: Install dotdeb key
+    apt_key: url=http://www.dotdeb.org/dotdeb.gpg
+    tags: dotdeb
 
-- name: add dotdeb main repository
-	apt_repository: repo='{{ item }}' update_cache=yes
-	with_items:
-	- deb http://packages.dotdeb.org wheezy all
-	- deb-src http://packages.dotdeb.org wheezy all
-	tags: dotdeb
-
-- name: Install pre-requisites
-	apt: pkg="{{ item }} update_cache=yes"
-	with_itens:
-		- python-software-properties
-		- git
-		- build-essential
-    - autoconf
-    - automake
-  tags: apt  
+  - name: Install pre-requisites
+    apt: pkg="{{ item }}" state=latest force=yes
+    with_items:
+      - python-pip
+      - curl
+      - build-essential
+      - automake
+      - autoconf
+      - git
+      - unzip
+    tags: apt    
+    
