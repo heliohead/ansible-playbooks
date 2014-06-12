@@ -1,0 +1,28 @@
+---
+- name: Install ntp
+  apt: pkg=ntp state=installed
+  tags: ntp
+
+- name: Configure ntp.br
+  template: src=templates/ntp.conf.j2 dest=/etc/ntp.conf
+  tags: ntp
+
+- name: Create a drift file
+  file: path=/etc/ntp.drift state=touch
+  tags: ntp
+
+- name: change to Sao Paulo TimeZone
+  copy: >
+    src=/usr/share/zoneinfo/America/Sao_Paulo
+    dest=/etc/localtime owner=root
+    group=root
+    force=yes
+  tags: ntp
+
+- name: setup ntp
+  command: /usr/sbin/ntpd -p -g
+  tags: ntp
+
+- name: restart ntp
+  service: name=ntp state=restarted
+  tags: ntp

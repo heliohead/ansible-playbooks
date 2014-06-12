@@ -1,8 +1,8 @@
 ---
 - name: Install nginx
-	apt: pkg=nginx update_cache=yes
-	tags: nginx
+  apt: pkg=nginx update_cache=yes
+  tags: nginx
 
 - name: restart nginx
   service: name=nginx state=restarted enabled=yes
-  tags: nginx			
+  tags: nginx
