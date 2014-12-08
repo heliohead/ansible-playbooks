@@ -1,0 +1,17 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    web_server: nginx
+    servername: myApp.vb www.myApp.vb 192.168.33.99
+    timezone: America/Sao_Paulo
+  vars_files:
+    - vars/pgsql.yml
+    - vars/common.yml
+    - [ "vars/nginx.yml", "vars/ws_defaults.yml" ]
+  roles:
+    - init
+    #- ruby
+    - nginx
+    #- pgsql
+    #- app

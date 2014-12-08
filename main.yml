@@ -1,7 +1,0 @@
----
-- hosts: all
-  user: root
-  tasks:
-    - include: apt/apt.yml
-    - include: nginx/nginx.yml
-    - include: ntp/ntp.yml

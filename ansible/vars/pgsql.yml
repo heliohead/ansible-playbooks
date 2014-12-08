@@ -1,0 +1,4 @@
+pgsql:
+    user: user
+    password: password
+    database: db

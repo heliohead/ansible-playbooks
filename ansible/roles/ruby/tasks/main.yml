@@ -1,0 +1,28 @@
+- name: Install Ruby and Dependencies
+  sudo: yes
+  apt: update_cache=yes cache_valid_time=3600
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - build-essential
+    - g++
+    - openssl
+    - libtool
+    - libc6-dev
+    - libreadline6
+    - libreadline6-dev
+    - libncurses5-dev
+    - ncurses-dev
+    - zlib1g
+    - zlib1g-dev
+    - libssl-dev
+    - libyaml-dev
+    - libsqlite3-dev
+    - libxml2-dev
+    - libxslt-dev
+    - libffi-dev
+    - autoconf
+    - automake
+    - bison
+    - pkg-config
+    - sqlite3
+  tags: ruby
