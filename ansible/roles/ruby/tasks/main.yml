@@ -1,7 +1,7 @@
 - name: Remove old ruby
   apt: name=ruby state=absent purge=yes
 
-- name: Install Ruby and Dependencies
+- name: Install Dependencies from Ruby
   sudo: yes
   apt: update_cache=yes cache_valid_time=3600
   apt: pkg={{ item }} state=latest
@@ -29,3 +29,22 @@
     - pkg-config
     - sqlite3
   tags: ruby
+
+- name: Check if the Ruby zip exists.
+  command: /usr/bin/test -e /tmp/ruby-2.1.5.tar.gz
+  ignore_errors: True
+  register: ruby_exists
+
+- name: Download Ruby
+  get_url: url=http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz dest=/tmp mode=0440
+  when: ruby_exists.rc != 0
+
+- name: Extract Ruby
+  command: sudo tar xzf /tmp/ruby-2.1.5.tar.gz chdir=/tmp
+
+- name: Build Ruby
+  command: sudo {{ item }} chdir="/tmp/ruby-2.1.5"
+  with_items:
+    - ./configure
+    - make
+    - make install
