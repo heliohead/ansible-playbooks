@@ -1,3 +1,6 @@
+- name: Remove old ruby
+  apt: name=ruby state=absent purge=yes
+
 - name: Install Ruby and Dependencies
   sudo: yes
   apt: update_cache=yes cache_valid_time=3600
