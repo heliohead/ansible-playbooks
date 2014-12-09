@@ -1,6 +1,21 @@
 - name: Remove old ruby
   apt: name=ruby state=absent purge=yes
 
+- name: Download chruby
+  command: wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz chdir=/tmp
+
+- name: Extract
+  command: tar xzf chruby-0.3.9.tar.gz chdir=/tmp
+
+- name: Install chruby
+  command: sudo make install chdir=/tmp/chruby-0.3.9
+
+- name: Configuring
+  command: bash setup.sh chdir=/tmp/chruby-0.3.9/script
+
+- name: Configuring
+  lineinfile: dest=/etc/profile.d/chruby.sh insertafter="^fi " line="source /usr/local/share/chruby/chruby.sh"
+
 - name: Install Dependencies from Ruby
   sudo: yes
   apt: update_cache=yes cache_valid_time=3600
@@ -28,23 +43,19 @@
     - bison
     - pkg-config
     - sqlite3
-  tags: ruby
-
-- name: Check if the Ruby zip exists.
-  command: /usr/bin/test -e /tmp/ruby-2.1.5.tar.gz
-  ignore_errors: True
-  register: ruby_exists
 
 - name: Download Ruby
   get_url: url=http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz dest=/tmp mode=0440
-  when: ruby_exists.rc != 0
 
 - name: Extract Ruby
-  command: sudo tar xzf /tmp/ruby-2.1.5.tar.gz chdir=/tmp
+  command: tar xzf /tmp/ruby-2.1.5.tar.gz chdir=/tmp
 
 - name: Build Ruby
   command: sudo {{ item }} chdir="/tmp/ruby-2.1.5"
   with_items:
-    - ./configure
+    - ./configure --prefix=/opt/rubies/ruby-2.1.5
     - make
     - make install
+
+- name: Install Bundler
+  command: gem install bundler
