@@ -44,3 +44,6 @@
 
 - name: Install Bundler
   command: gem install bundler
+
+- name: Add no docs gemrc
+  template: src=gemrc.tpl dest='~/.gemrc'
