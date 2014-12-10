@@ -11,7 +11,8 @@
     - [ "vars/nginx.yml", "vars/ws_defaults.yml" ]
   roles:
     - init
-    #- ruby
+    - chruby
+    - ruby
     - nginx
-    #- pgsql
-    #- app
+    - pgsql
+    - app

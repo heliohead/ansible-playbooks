@@ -1,0 +1,14 @@
+- name: Remove old ruby
+  apt: name=ruby state=absent purge=yes
+
+- name: Download chruby
+  command: wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz chdir=/tmp
+
+- name: Extract
+  command: tar xzf chruby-0.3.9.tar.gz chdir=/tmp
+
+- name: Install chruby
+  command: sudo make install chdir=/tmp/chruby-0.3.9
+
+- name: Configuring
+  template: src=default.tpl dest=/etc/profile.d/chruby.sh
