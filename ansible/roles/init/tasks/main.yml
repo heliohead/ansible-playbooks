@@ -15,10 +15,16 @@
     - imagemagick
 
 - name: APT | Add dotdeb
-  apt_repository: repo='deb http://packages.dotdeb.org wheezy all' state=present
+  apt_repository: repo={{ item }}
+  with_items:
+    - deb http://packages.dotdeb.org wheezy all
+    - deb-src http://packages.dotdeb.org wheezy all
+
+- name: APT | Install DotDeb key
+  apt_key: url=http://www.dotdeb.org/dotdeb.gpg
 
 - name: Add user deploy
-  user: name=deploy shell=/bin/bash groups=admin,www-data append=yes
+  user: name=deploy shell=/bin/bash groups=www-data
 
 - name: Configure the timezone
   sudo: yes
