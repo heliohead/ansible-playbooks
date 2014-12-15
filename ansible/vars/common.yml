@@ -3,3 +3,9 @@
     doc_root: /vagrant
     sys_packages: []
     tmp_dir: /tmp
+    branch: master
+    repo: https://github.com/heliohead/ansible-ror.git
+    user: deploy
+    app_name: teste
+    rails_env: production
+    deploy_to: "/home/{{ user }}/application"
