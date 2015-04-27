@@ -14,14 +14,8 @@
     - nodejs
     - imagemagick
 
-- name: APT | Add dotdeb
-  apt_repository: repo={{ item }}
-  with_items:
-    - deb http://packages.dotdeb.org wheezy all
-    - deb-src http://packages.dotdeb.org wheezy all
-
-- name: APT | Install DotDeb key
-  apt_key: url=http://www.dotdeb.org/dotdeb.gpg
+- name: APT nginx
+  apt_repository: repo='ppa:nginx/stable'
 
 - name: Add user deploy
   user: name=deploy shell=/bin/bash groups=www-data

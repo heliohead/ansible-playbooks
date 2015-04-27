@@ -1,0 +1,8 @@
+- name: Source chruby
+  command: /usr/local/bin/chruby-exec 2.1.5
+
+- name: Install Bundler
+  command: gem install bundler
+
+- name: Add no docs gemrc
+  template: src=gemrc.tpl dest='~/.gemrc'

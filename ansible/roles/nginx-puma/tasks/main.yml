@@ -1,0 +1,21 @@
+---
+- name: Install Nginx
+  sudo: yes
+  apt: pkg=nginx state=latest force=yes
+
+- name: Remove default nginx site
+  file: dest=/etc/nginx/{{ item }}/default state=absent
+  with_items:
+    - sites-enabled
+    - sites-available
+  notify: restart nginx service
+
+- name: Configure nginx
+  template: src=nginx.conf dest=/etc/nginx
+
+- name: Create nginx vhost
+  template: src=vhost.conf dest=/etc/nginx/sites-enabled/{{ app_name }}
+  notify: restart nginx service
+
+- name: Ensure nginx service up and running
+  service: name=nginx enabled=yes state=started
