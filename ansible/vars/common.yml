@@ -1,11 +1,11 @@
 ---
 
+    hostname: deploy
     doc_root: /vagrant
     sys_packages: []
     tmp_dir: /tmp
     branch: master
     repo: https://github.com/heliohead/ansible-ror.git
-    chruby_version: '0.3.8'
     user: deploy
     app_name: teste
     rails_env: production

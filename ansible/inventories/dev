@@ -1,2 +1,2 @@
 [web]
-192.168.33.99
+167.88.47.145 ansible_ssh_user=user

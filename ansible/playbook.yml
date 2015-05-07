@@ -10,9 +10,8 @@
     - vars/common.yml
     - vars/nginx.yml
   roles:
-    - init
-    - chruby
-    - ruby
+    #- init
+    #- ruby
     - nginx-puma
-    - pgsql
-    - app
+    #- pgsql
+    #- app

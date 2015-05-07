@@ -8,14 +8,13 @@
   with_items:
     - sites-enabled
     - sites-available
-  notify: restart nginx service
 
 - name: Configure nginx
-  template: src=nginx.conf dest=/etc/nginx
+  template: src=nginx.conf.tpl dest=/etc/nginx.conf owner=root group=root mode=0600
 
 - name: Create nginx vhost
   template: src=vhost.conf dest=/etc/nginx/sites-enabled/{{ app_name }}
-  notify: restart nginx service
+  notify: restart nginx
 
 - name: Ensure nginx service up and running
   service: name=nginx enabled=yes state=started

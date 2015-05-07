@@ -27,7 +27,9 @@
     - sqlite3
 
 – name: Install rvm gpg
-  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  shell: >
+    executable=/bin/bash
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
 – name: Install RVM
   shell: curl -L get.rvm.io | bash -s stable

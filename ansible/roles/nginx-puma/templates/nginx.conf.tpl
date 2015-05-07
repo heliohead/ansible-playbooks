@@ -36,7 +36,5 @@ http {
                 application/xml application/xml+rss text/javascript
                 image/svg+xml;
     gzip_disable "MSIE [1-6] \.";
-
-    include /etc/nginx/sites-avaliable/*;
 }
 
