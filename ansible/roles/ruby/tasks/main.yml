@@ -1,4 +1,4 @@
-- name: Install Dependencies from Ruby
+- name: Install rvm and ruby
   sudo: yes
   apt: update_cache=yes cache_valid_time=3600
   apt: pkg={{ item }} state=latest
@@ -26,21 +26,21 @@
     - pkg-config
     - sqlite3
 
-- name: Download Ruby
-  get_url: url=http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz dest=/tmp mode=0440
+– name: Install rvm gpg
+  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
-- name: Extract Ruby
-  command: tar xzf /tmp/ruby-2.1.5.tar.gz chdir=/tmp
+– name: Install RVM
+  shell: curl -L get.rvm.io | bash -s stable
 
-- name: Build Ruby
-  command: sudo {{ item }} chdir="/tmp/ruby-2.1.5"
-  with_items:
-    - ./configure --prefix=/opt/rubies/ruby-2.1.5
-    - make
-    - make install
+– name: Install Ruby 2.2.2
+  shell: >
+    executable=/bin/bash source /etc/profile.d/rvm.sh;
+    rvm install 2.2.2
 
-- name: chruby config default
-  command: chruby 2.1.5
+– name: Set default ruby version
+  shell: >
+    executable=/bin/bash source /etc/profile.d/rvm.sh;
+    rvm —default use 2.2.2
 
 - name: Install Bundler
   command: gem install bundler
