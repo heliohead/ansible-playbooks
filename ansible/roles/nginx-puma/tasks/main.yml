@@ -10,7 +10,7 @@
     - sites-available
 
 - name: Configure nginx
-  template: src=nginx.conf.tpl dest=/etc/nginx.conf owner=root group=root mode=0600
+  template: src=nginx.conf dest=/etc/nginx.conf owner=root group=root mode=0600
 
 - name: Create nginx vhost
   template: src=vhost.conf dest=/etc/nginx/sites-enabled/{{ app_name }}
