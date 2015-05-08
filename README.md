@@ -1,4 +1,2 @@
- This is my Ansible Playbook to simple host VPS
- -----------------------------------------------
-
- 
+ This is my Ansible Playbook to simple host  rails on VPS
+ --------------------------------------------------------

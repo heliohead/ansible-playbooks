@@ -1,9 +1,9 @@
 ---
 
-web_server: nginx
-nginx_user: www-data
-nginx_group: www-data
-nginx_workers: 2
-nginx_connections: 1024
-nginx_keepalive_requests: 60
-nginx_keepalive_timeout: 30
+  web_server: nginx
+  nginx_user: www-data
+  nginx_group: www-data
+  nginx_workers: 2
+  nginx_connections: 1024
+  nginx_keepalive_requests: 60
+  nginx_keepalive_timeout: 30

@@ -7,7 +7,7 @@
   user: deploy
   app_name: teste
   rails_env: production
-  deploy_to: "/home/{{ user }}/application"
+  deploy_to: "/home/{{ user }}/{{ app_name }}"
   timezone: America/Sao_Paulo
   rvm1_rubies: ['ruby-2.2.2']
   rvm1_rvm_check_for_updates: false

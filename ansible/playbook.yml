@@ -10,6 +10,5 @@
     #- init
     #- { role: rvm_io.rvm1-ruby, tags: ruby, sudo: yes }
     #- ruby
-    #- nginx-puma
-    - pgsql
-    #- app
+    - nginx-puma
+    #- pgsql
