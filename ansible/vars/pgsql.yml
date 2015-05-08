@@ -1,4 +1,5 @@
 pgsql:
-    db_user: "{{ user }}"
-    db_name: "{{ app_name }}_{{ rails_env }}"
-    db_password: "{{ lookup('password', 'credentials/' + user + '.postgres length=30') }}"
+  db_user: "{{ user }}"
+  db_database: "{{ rails_env }}"
+  db_name: "{{ app_name }}_{{ rails_env }}"
+  db_password: "{{ lookup('password', 'credentials/' + user + '.postgres length=30') }}"
