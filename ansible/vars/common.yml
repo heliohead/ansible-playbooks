@@ -1,15 +1,14 @@
 ---
-  hostname: deploy
+  hostname: cefops
   sys_packages: []
   tmp_dir: /tmp
   branch: master
   repo: https://github.com/heliohead/ansible-ror.git
   user: deploy
-  app_name: teste
+  app_name: cefops
   rails_env: production
   deploy_to: "/home/{{ user }}/{{ app_name }}"
   timezone: America/Sao_Paulo
   rvm1_rubies: ['ruby-2.2.2']
   rvm1_rvm_check_for_updates: false
   rvm1_default_ruby_version: ['ruby-2.2.2']
-  rvm1_user: 'user'

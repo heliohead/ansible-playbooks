@@ -7,8 +7,7 @@
     - vars/common.yml
     - vars/nginx.yml
   roles:
-    #- init
-    #- { role: rvm_io.rvm1-ruby, tags: ruby, sudo: yes }
-    #- ruby
+    - init
+    - ruby
     - nginx-puma
-    #- pgsql
+    - pgsql
