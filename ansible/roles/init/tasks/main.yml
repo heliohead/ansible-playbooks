@@ -7,7 +7,9 @@
   apt_key: url=http://apt.hellobits.com/hellobits.key
 
 - name: Add hellobits repo
-  apt_repository: repo='deb http://apt.hellobits.com/ trusty main' state=present
+  apt_repository: >
+    repo='deb [arch=amd64] http://apt.hellobits.com/ trusty main'
+    state=present
 
 - name: Install ruby
   apt: >
