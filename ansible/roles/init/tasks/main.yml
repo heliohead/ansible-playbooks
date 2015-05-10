@@ -3,6 +3,20 @@
   sudo: yes
   apt: update_cache=yes cache_valid_time=3600
 
+- name: hellobits key
+  apt_key: url=http://apt.hellobits.com/hellobits.key
+
+- name: Add hellobits repo
+  apt_repository: repo='deb http://apt.hellobits.com/ trusty main' state=present
+
+- name: Install ruby
+  apt: >
+    pkg=ruby-2.2
+    update_cache=yes
+    cache_valid_time=3600
+    state=latest
+    force=yes
+
 - name: Install System Packages
   sudo: yes
   apt: pkg={{ item }} state=latest
@@ -13,12 +27,27 @@
     - git-core
     - nodejs
     - imagemagick
+    - build-essential
+    - autoconf
+    - automake
+    - bison
+    - libc6-dev
+    - libffi-dev
+    - libreadline6
+    - libreadline6-dev
+    - libssl-dev
+    - libtool
+    - libxml2-dev
+    - libxslt-dev
+    - libxslt1-dev
+    - libyaml-dev
+    - ncurses-dev
+    - zlib1g
+    - zlib1g-dev
+    - git
 
-- name: APT nginx
-  apt_repository: repo='ppa:nginx/stable'
-
-- name: Add user deploy
-  user: name=deploy shell=/bin/bash groups=www-data
+- name: Add user
+  user: name={{ user }} shell=/bin/bash groups=www-data
 
 - name: Configure the timezone
   sudo: yes
@@ -26,7 +55,7 @@
 
 - name: More Configure the timezone
   sudo: yes
-  file: src=/usr/share/zoneinfo/{{timezone}} dest=/etc/localtime state=link force=yes backup=yes
+  file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes backup=yes
 
 - name: Set the hostname in /etc/hostname
   shell: echo {{ hostname }} > /etc/hostname
