@@ -50,22 +50,34 @@
 
 - name: Add user
   user: name={{ user }} shell=/bin/bash groups=www-data
+  tags:
+    - user
 
 - name: Configure the timezone
   sudo: yes
   template: src=timezone.tpl dest=/etc/timezone
+  tags:
+    - user
 
 - name: More Configure the timezone
   sudo: yes
   file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes backup=yes
+  tags:
+    - user
 
 - name: Set the hostname in /etc/hostname
   shell: echo {{ hostname }} > /etc/hostname
   when: hostname is defined
+  tags:
+    - user
 
 - name: Set the hostname
   shell: hostname {{ hostname }}
   when: hostname is defined
+  tags:
+    - user
 
 - name: Update /etc/hosts
   lineinfile: dest=/etc/hosts regexp='^127\.0\.0\.1' line='127.0.0.1 localhost {{ hostname }}' owner=root group=root mode=0644
+  tags:
+    - user
