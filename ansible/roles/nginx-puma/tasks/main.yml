@@ -1,7 +1,28 @@
 ---
+
+- name: Add Keys for Nginx Repository
+  sudo: yes
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+  tags:
+    - nginx
+
+- name: Add Nginx Repository
+  sudo: yes
+  apt_repository: repo='deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx' state=present
+  tags:
+    - nginx
+
+- name: Update apt
+  sudo: yes
+  apt: update_cache=yes
+  tags:
+    - nginx
+
 - name: Install Nginx
   sudo: yes
   apt: pkg=nginx state=latest force=yes
+  tags:
+    - nginx
 
 - name: Remove default nginx site
   file: dest=/etc/nginx/{{ item }}/default state=absent

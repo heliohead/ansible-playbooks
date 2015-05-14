@@ -1,5 +1,5 @@
 ---
-  hostname: cefops
+  hostname: static
   sys_packages: []
   tmp_dir: /tmp
   branch: master
